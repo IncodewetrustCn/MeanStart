@@ -12,6 +12,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
+
+
+
+
 // CORS Support
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -29,6 +33,8 @@ app.use('/hello', function(req, res, next) {
 mongoose.connect('mongodb://localhost/meanapp');
 mongoose.connection.once('open', function() {
 								
+  // Load the models.
+  app.models = require('./models/index');
   console.log('Listening on port 3000...');
   app.listen(3000);
 });
